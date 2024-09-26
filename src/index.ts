@@ -33,7 +33,7 @@ function requestInterceptor(config: InternalAxiosRequestConfig): InternalAxiosRe
     throw new Error('axios-cookiejar-support does not support for use with other http(s).Agent.');
   }
 
-  config.httpAgent = new HttpCookieAgent({ cookies: { jar: config.jar } });
+  config.httpAgent = new HttpCookieAgent({ cookies: { jar: config.jar }, rejectUnauthorized: false });
   Object.defineProperty(config.httpAgent, AGENT_CREATED_BY_AXIOS_COOKIEJAR_SUPPORT, {
     configurable: false,
     enumerable: false,
@@ -41,7 +41,7 @@ function requestInterceptor(config: InternalAxiosRequestConfig): InternalAxiosRe
     writable: false,
   });
 
-  config.httpsAgent = new HttpsCookieAgent({ cookies: { jar: config.jar } });
+  config.httpsAgent = new HttpsCookieAgent({ cookies: { jar: config.jar }, rejectUnauthorized: false });
   Object.defineProperty(config.httpsAgent, AGENT_CREATED_BY_AXIOS_COOKIEJAR_SUPPORT, {
     configurable: false,
     enumerable: false,
